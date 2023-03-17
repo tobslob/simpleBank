@@ -1,5 +1,4 @@
 import {
-  Query,
   ControllerError,
   ModelNotFoundError,
   DuplicateModelError,
@@ -7,7 +6,7 @@ import {
 import { Request, Response } from 'express'
 import { injectable } from 'inversify'
 import _ from 'lodash'
-import { NOT_FOUND, BAD_REQUEST, CONFLICT } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { Log } from '@app/common/services/log'
 
 @injectable()
@@ -35,11 +34,11 @@ export class Controller<T> {
   getHTTPErrorCode(err) {
     // check if error code exists and is a valid HTTP code.
     if (err.code >= 100 && err.code < 600) {
-      if (err instanceof ModelNotFoundError) return NOT_FOUND
-      if (err instanceof DuplicateModelError) return CONFLICT
+      if (err instanceof ModelNotFoundError) return StatusCodes.NOT_FOUND
+      if (err instanceof DuplicateModelError) return StatusCodes.CONFLICT
       return err.code
     }
-    return BAD_REQUEST
+    return StatusCodes.BAD_REQUEST
   }
 
   /**
@@ -68,10 +67,5 @@ export class Controller<T> {
     Log.error(req, res, err)
   }
 }
-
-export type PaginationOptions = Pick<
-  Query,
-  Exclude<keyof Query, 'conditions' | 'archived'>
->
 
 export class BaseController<T> extends Controller<T> {}
