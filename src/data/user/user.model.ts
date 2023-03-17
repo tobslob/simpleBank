@@ -1,23 +1,22 @@
-import { Model } from "../database";
+import { Currency } from "../account/account.model";
 
-export interface User extends Model {
-  first_name: string;
-  last_name: string;
-  email_address: string;
-  location: string;
+export interface User {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
   password: string;
 }
 
 export interface UserDTO {
-  first_name: string;
-  last_name: string;
-  email_address: string;
-  location: string;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
   password: string;
+  currency: Currency
 }
 
 export interface LoginDTO {
-  email_address: string;
+  emailAddress: string;
   password: string;
 }
 

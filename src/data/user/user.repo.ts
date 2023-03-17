@@ -1,12 +1,7 @@
-import { User } from "./user.model";
-import { BaseRepository } from "../database";
-import { connection } from "mongoose";
-import { UserSchema } from "./user.schema";
+import { BaseRepository } from "../base/base.repo";
 
-class UserRepository extends BaseRepository<User> {
-  constructor() {
-    super(connection, "User", UserSchema);
-  }
+class Users extends BaseRepository {
+  super(){}
 }
 
-export const UserRepo = new UserRepository();
+export const UserRepo = new Users();
