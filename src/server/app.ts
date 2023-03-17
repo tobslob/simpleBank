@@ -3,7 +3,6 @@ import "reflect-metadata";
 import bodyparser from "body-parser";
 import responseTime from "response-time";
 import { getRouteInfo, InversifyExpressServer } from "inversify-express-utils";
-import mongoose, { Connection } from "mongoose";
 import container from "../common/config/ioc";
 import { Application, Request, Response } from "express";
 import dotenv from "dotenv";
@@ -15,7 +14,6 @@ import { errors } from "@app/data/util";
 dotenv.config();
 
 export class App {
-  db: Connection;
   private server: InversifyExpressServer;
   constructor() {
     this.server = new InversifyExpressServer(container, null, {
@@ -46,11 +44,6 @@ export class App {
     this.server.setErrorConfig((app: Application) => {
       // expose index endpoint
       app.get("/", (_req: Request, res: Response) => {
-        
-        if (mongoose.connections.every(conn => conn.readyState !== 1)) {
-          return res.status(500).send("MongoDB is not ready");
-        }
-
         res.status(200).json({
           status: "success",
           data: { message: "Welcome To Home Todo" }
@@ -76,22 +69,10 @@ export class App {
   }
 
   getServer = () => this.server;
-
-  async connectDB() {
-    await Store.connect();
-    await mongoose.connect(process.env.mongodb_url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
-    });
-    this.db = mongoose.connection;
-  }
-
   /**
    * Closes MongoDB and Redis connection
    */
   async closeDB() {
-    await mongoose.disconnect();
     await Store.quit();
   }
 }

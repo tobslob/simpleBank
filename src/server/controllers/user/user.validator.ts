@@ -1,15 +1,17 @@
 import Joi from '@hapi/joi'
 import { JoiValidator } from '@app/data/util'
+import { values } from 'lodash'
+import { Currency } from '@app/data/account/account.model'
 
 export const isUser = Joi.object({
-  first_name: JoiValidator.validateString().required(),
-  last_name: JoiValidator.validateString().required(),
-  email_address: JoiValidator.validateEmail().required(),
-  location: JoiValidator.validateString().required(),
-  password: JoiValidator.validatePassword().required()
+  firstName: JoiValidator.validateString().required(),
+  lastName: JoiValidator.validateString().required(),
+  emailAddress: JoiValidator.validateEmail().required(),
+  password: JoiValidator.validatePassword().required(),
+  currency: JoiValidator.validateString().allow(values(Currency)).required()
 })
 
 export const isLogin = Joi.object({
-  email_address: JoiValidator.validateEmail().required(),
+  emailAddress: JoiValidator.validateEmail().required(),
   password: JoiValidator.validatePassword().required()
 })

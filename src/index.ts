@@ -13,8 +13,6 @@ const start = async () => {
     const appServer = app.getServer().build();
 
     // connect to MongoDB
-    await app.connectDB();
-    Log.info("📦  MongoDB Connected!");
 
     // start server
     const httpServer = http.createServer(appServer);
