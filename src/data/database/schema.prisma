@@ -21,28 +21,28 @@ model Users {
   account      Accounts[]
 }
 
-enum Currency {
-  gbp
-  usd
-}
-
 model Accounts {
   id            String    @id @default(uuid())
   accountNumber String    @unique
   userId        String
   users         Users     @relation(fields: [userId], references: [id])
-  balance       BigInt
+  balance       Float     @default(0)
   currency      Currency
   sortCode      Int
   createdAt     DateTime  @default(now())
   entries       Entries[]
 }
 
+enum Currency {
+  GBP
+  USD
+}
+
 model Entries {
   id          String       @id @default(uuid())
   accountId   String
   account     Accounts     @relation(fields: [accountId], references: [id])
-  amount      BigInt
+  amount      Float
   tranferType TransferType
   createdAt   DateTime     @default(now())
 }

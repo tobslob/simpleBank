@@ -1,6 +1,7 @@
-import { Currency } from "../account/account.model";
+import { Account, Currency } from "../account/account.model";
 
 export interface User {
+  id: string;
   firstName: string;
   lastName: string;
   emailAddress: string;
@@ -12,7 +13,7 @@ export interface UserDTO {
   lastName: string;
   emailAddress: string;
   password: string;
-  currency: Currency
+  currency: Currency;
 }
 
 export interface LoginDTO {
@@ -22,4 +23,5 @@ export interface LoginDTO {
 
 export interface Auth extends User {
   token: string;
+  account: Account[]
 }
