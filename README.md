@@ -2,7 +2,6 @@
 
 ![ts](https://flat.badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)
 
-
 <div id="top"></div>
 
 <!--
@@ -28,7 +27,7 @@
 
 ## DB MODEL
 
-![DB MODEL](https://github.com/tobslob/FarmLend-Management/blob/master/database-model.png?raw=true)
+![DB MODEL](https://github.com/tobslob/simpleBank/blob/staging/database-model.png?raw=true)
 
 # Running locally
 
