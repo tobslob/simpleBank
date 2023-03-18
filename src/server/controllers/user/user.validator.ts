@@ -8,7 +8,7 @@ export const isUser = Joi.object({
   lastName: JoiValidator.validateString().required(),
   emailAddress: JoiValidator.validateEmail().required(),
   password: JoiValidator.validatePassword().required(),
-  currency: JoiValidator.validateString().allow(values(Currency)).required()
+  currency: JoiValidator.validateString().valid(values(Currency)).required()
 })
 
 export const isLogin = Joi.object({

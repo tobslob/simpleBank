@@ -1,7 +1,7 @@
-import { BaseRepository } from "../base/base.repo";
+import { BaseRepository } from "@app/data/base/base.repo";
 
 class Users extends BaseRepository {
-  super(){}
+  super() {}
 }
 
 export const UserRepo = new Users();

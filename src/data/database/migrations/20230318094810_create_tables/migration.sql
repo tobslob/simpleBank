@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Currency" AS ENUM ('gbp', 'usd');
+CREATE TYPE "Currency" AS ENUM ('GBP', 'USD');
 
 -- CreateEnum
 CREATE TYPE "TransferType" AS ENUM ('CREDIT', 'DEBIT');
@@ -21,7 +21,7 @@ CREATE TABLE "Accounts" (
     "id" TEXT NOT NULL,
     "accountNumber" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "balance" BIGINT NOT NULL,
+    "balance" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "currency" "Currency" NOT NULL,
     "sortCode" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -33,7 +33,7 @@ CREATE TABLE "Accounts" (
 CREATE TABLE "Entries" (
     "id" TEXT NOT NULL,
     "accountId" TEXT NOT NULL,
-    "amount" BIGINT NOT NULL,
+    "amount" DOUBLE PRECISION NOT NULL,
     "tranferType" "TransferType" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

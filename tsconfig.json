@@ -26,5 +26,10 @@
     "emitDecoratorMetadata": true
   },
   "exclude": ["src/**/*.spec.ts"],
-  "include": ["src/**/*", "./src/type/index.d.ts", "migrations"]
+  "include": [
+    "src/**/*",
+    "./src/type/index.d.ts",
+    "migrations",
+    "src/data/base"
+  ]
 }

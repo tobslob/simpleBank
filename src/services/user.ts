@@ -12,19 +12,23 @@ class UserService {
 
   async createUser(user: UserDTO): Promise<User> {
     const password = await Passwords.generateHash(user.password);
-    let createdUser
+    let createdUser;
     await UserRepo.$transaction(async (transaction) => {
-      delete user.currency;
       createdUser = await transaction.users.create({
-        data: { ...user, password },
+        data: {
+          emailAddress: user.emailAddress,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          password,
+        },
       });
       await transaction.accounts.create({
         data: {
-          accountNumber: String(accountNumberGenerator( 10000000, 99999999)),
+          accountNumber: String(accountNumberGenerator(10000000, 99999999)),
           balance: 0,
-          currency: user.currency ?? "gbp",
+          currency: user.currency,
           userId: createdUser.id,
-          sortCode: accountNumberGenerator(100000, 999999)
+          sortCode: accountNumberGenerator(100000, 999999),
         },
       });
     });
@@ -39,6 +43,7 @@ class UserService {
   async login(login: LoginDTO): Promise<string> {
     const user = await UserRepo.users.findUniqueOrThrow({
       where: { emailAddress: login.emailAddress },
+      include: { account: true },
     });
 
     const isCorrectPassword = await Passwords.validate(
