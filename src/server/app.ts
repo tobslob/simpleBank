@@ -17,7 +17,7 @@ export class App {
   private server: InversifyExpressServer;
   constructor() {
     this.server = new InversifyExpressServer(container, null, {
-      rootPath: process.env.api_version
+      rootPath: process.env.api_version,
     });
 
     // setup server-level middlewares
@@ -33,8 +33,11 @@ export class App {
       // CORS
       const domains = [""];
       const corsConf = {
-        origin: [/localhost/, ...domains.map(domain => new RegExp(`${domain}$`))],
-        credentials: true
+        origin: [
+          /localhost/,
+          ...domains.map((domain) => new RegExp(`${domain}$`)),
+        ],
+        credentials: true,
       };
 
       app.use(cors(corsConf));
@@ -46,7 +49,7 @@ export class App {
       app.get("/", (_req: Request, res: Response) => {
         res.status(200).json({
           status: "success",
-          data: { message: "Welcome To Home Todo" }
+          data: { message: "Welcome To Home Todo" },
         });
       });
 
@@ -54,7 +57,7 @@ export class App {
       app.use((_req, res, _next) => {
         res.status(404).json({
           status: "error",
-          data: { message: "Not Found" }
+          data: { message: "Not Found" },
         });
       });
 

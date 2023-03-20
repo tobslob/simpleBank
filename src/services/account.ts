@@ -26,7 +26,6 @@ class Accounts {
         accountNumber: String(accountNumberGenerator(10000000, 99999999)),
         currency: account.currency,
         sortCode: accountNumberGenerator(100000, 999999),
-        balance: 0,
         userId: req.user.id,
       },
     });

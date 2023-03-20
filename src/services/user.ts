@@ -13,6 +13,7 @@ class UserService {
   async createUser(user: UserDTO): Promise<User> {
     const password = await Passwords.generateHash(user.password);
     let createdUser;
+    let token: string;
     await UserRepo.$transaction(async (transaction) => {
       createdUser = await transaction.users.create({
         data: {
@@ -22,6 +23,7 @@ class UserService {
           password,
         },
       });
+      token = await seal(user, process.env.SECRET_KEY, "2h");
       await transaction.accounts.create({
         data: {
           accountNumber: String(accountNumberGenerator(10000000, 99999999)),
@@ -33,7 +35,7 @@ class UserService {
       });
     });
 
-    return createdUser;
+    return { ...createdUser, token };
   }
 
   async getUser(id: string): Promise<User> {
