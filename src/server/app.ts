@@ -49,7 +49,7 @@ export class App {
       app.get("/", (_req: Request, res: Response) => {
         res.status(200).json({
           status: "success",
-          data: { message: "Welcome To Home Todo" },
+          data: { message: "Welcome To Simple Bank" },
         });
       });
 
