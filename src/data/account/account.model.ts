@@ -1,5 +1,6 @@
-export interface Account {
-  id: string;
+import { BaseModel } from "../base/base.model";
+
+export interface Account extends BaseModel {
   accountNumber: string;
   userId: string;
   balance: number;
