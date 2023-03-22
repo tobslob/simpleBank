@@ -1,9 +1,9 @@
-export interface Transfer {
-  id: string;
+import { BaseModel } from "../base/base.model";
+
+export interface Transfer extends BaseModel {
   fromAccountId: string;
   toAccountId: string;
   amount: string;
-  createdAt: string;
   userId: string;
 }
 
