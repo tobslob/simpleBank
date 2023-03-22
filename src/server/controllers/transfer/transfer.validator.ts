@@ -6,4 +6,5 @@ export const isTransfer = Joi.object({
     .regex(/^[0-9]{8}$/)
     .required(),
   amount: JoiValidator.validateNumber().required(),
+  description: JoiValidator.validateString().required(),
 });

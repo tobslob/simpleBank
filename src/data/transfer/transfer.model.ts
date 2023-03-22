@@ -10,4 +10,5 @@ export interface Transfer {
 export interface TransferDTO {
   toAccountId: string;
   amount: number;
+  description: string;
 }

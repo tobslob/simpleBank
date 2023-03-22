@@ -44,6 +44,7 @@ model Entries {
   account     Accounts     @relation(fields: [accountId], references: [id])
   amount      Float
   tranferType TransferType
+  description String?
   createdAt   DateTime     @default(now())
 }
 

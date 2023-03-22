@@ -26,6 +26,7 @@ class Transfers {
           amount: transfer.amount,
           tranferType: TransferType.DEBIT,
           accountId: account[0].id,
+          description: transfer.description,
         },
       });
 

@@ -2,13 +2,13 @@ import {
   controller,
   request,
   response,
-  requestParam,
   httpGet,
+  queryParam,
 } from "inversify-express-utils";
 import { BaseController, validate } from "@app/data/util";
 import { Request, Response } from "express";
 import { isAccountNumber } from "../account/account.validator";
-import { Entity } from "@app/data/entity/entity.model";
+import { Entity, EntityDTO } from "@app/data/entity/entity.model";
 import { entity } from "@app/services/entity";
 import { secure } from "@app/common/services/jsonwebtoken";
 
@@ -18,10 +18,13 @@ export class EntityController extends BaseController<Entity[]> {
   async getAllEntities(
     @request() req: Request,
     @response() res: Response,
-    @requestParam("id") id: string
+    @queryParam() query: EntityDTO
   ) {
     try {
-      const entities = await entity.getAllEntities(id);
+      const entities = await entity.getAllEntities(
+        query.accountId,
+        Number(query?.limit ?? 10)
+      );
       this.handleSuccess(req, res, entities);
     } catch (error) {
       this.handleError(req, res, error);
