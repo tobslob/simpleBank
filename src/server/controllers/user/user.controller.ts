@@ -4,6 +4,8 @@ import {
   request,
   response,
   requestBody,
+  httpGet,
+  requestParam,
 } from "inversify-express-utils";
 import { BaseController, validate } from "@app/data/util";
 import { User, UserDTO, LoginDTO } from "@app/data/user";
@@ -23,6 +25,20 @@ export class UserController extends BaseController<controllerResponse> {
   ) {
     try {
       const user = await Users.createUser(body);
+      this.handleSuccess(req, res, user);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
+  }
+
+  @httpGet("/:token")
+  async getUser(
+    @request() req: Request,
+    @response() res: Response,
+    @requestParam("token") token: string
+  ) {
+    try {
+      const user = await Users.decodeToken(token);
       this.handleSuccess(req, res, user);
     } catch (error) {
       this.handleError(req, res, error);
