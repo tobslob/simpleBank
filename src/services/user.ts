@@ -1,7 +1,7 @@
 import { UserDTO, User, LoginDTO } from "@app/data/user";
 import { Passwords } from "./password";
 import { accountNumberGenerator, UnAuthorisedError } from "@app/data/util";
-import { seal } from "@app/common/services/jsonwebtoken";
+import { seal, unseal } from "@app/common/services/jsonwebtoken";
 import { config } from "dotenv";
 import { UserRepo } from "@app/data/user/user.repo";
 
@@ -40,6 +40,10 @@ class UserService {
 
   async getUser(id: string): Promise<User> {
     return await UserRepo.users.findUnique({ where: { id } });
+  }
+
+  async decodeToken(token: string) {
+    return unseal(token, process.env.SECRET_KEY);
   }
 
   async login(login: LoginDTO): Promise<string> {

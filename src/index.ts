@@ -12,8 +12,6 @@ const start = async () => {
     const app = new App();
     const appServer = app.getServer().build();
 
-    // connect to MongoDB
-
     // start server
     const httpServer = http.createServer(appServer);
     httpServer.listen(process.env.PORT);
