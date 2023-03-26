@@ -11,7 +11,7 @@ import { BaseController, validate } from "@app/data/util";
 import { User, UserDTO, LoginDTO } from "@app/data/user";
 import { Users } from "@app/services/user";
 import { Request, Response } from "express";
-import { isUser, isLogin } from "./user.validator";
+import { isUser, isLogin, isID } from "./user.validator";
 
 type controllerResponse = User | User[] | string;
 
@@ -31,7 +31,7 @@ export class UserController extends BaseController<controllerResponse> {
     }
   }
 
-  @httpGet("/:id")
+  @httpGet("/:id", validate(isID))
   async getUser(
     @request() req: Request,
     @response() res: Response,

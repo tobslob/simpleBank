@@ -15,9 +15,7 @@ class Accounts {
     const [{ accountNumber, id, currency }] = req.user.account;
     const account = await accountRepo.accounts.update({
       where: { accountNumber },
-      data: {
-        balance: balance.balance,
-      },
+      data: { balance: { increment: balance.balance } },
     });
 
     await entityRepo.entries.create({
