@@ -23,7 +23,8 @@ export class EntityController extends BaseController<Entity[]> {
     try {
       const entities = await entity.getAllEntities(
         query.accountId,
-        Number(query?.limit ?? 10)
+        Number(query?.limit ?? 10),
+        req
       );
       this.handleSuccess(req, res, entities);
     } catch (error) {
