@@ -6,7 +6,7 @@ import { Request } from "express";
 class Transfers {
   async createTransfer(transfer: TransferDTO, req: Request) {
     let acct;
-    const { account } = req.user;
+    const { account, id, firstName } = req.user;
     await transferRepo.$transaction(async (transaction) => {
       const getAcct = await transaction.accounts.findFirst({
         where: { accountNumber: account[0].accountNumber },
@@ -26,6 +26,7 @@ class Transfers {
           amount: transfer.amount,
           tranferType: TransferType.DEBIT,
           accountId: account[0].id,
+          userId: id,
           description: transfer.description,
         },
       });
@@ -40,6 +41,8 @@ class Transfers {
           amount: transfer.amount,
           tranferType: TransferType.CREDIT,
           accountId: receiverAcct.id,
+          userId: id,
+          description: `account credited by ${firstName}`,
         },
       });
     });

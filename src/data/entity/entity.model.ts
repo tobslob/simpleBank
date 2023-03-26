@@ -2,6 +2,7 @@ import { BaseModel } from "../base/base.model";
 
 export interface Entity extends BaseModel {
   accountId: string;
+  userId: string;
   amount: number;
   tranferType: "CREDIT" | "DEBIT";
   description?: string;

@@ -19,6 +19,7 @@ model Users {
   createdAt    DateTime    @default(now())
   transfers    Transfers[]
   account      Accounts[]
+  Entries      Entries[]
 }
 
 model Accounts {
@@ -42,6 +43,8 @@ model Entries {
   id          String       @id @default(uuid())
   accountId   String
   account     Accounts     @relation(fields: [accountId], references: [id])
+  userId      String
+  user        Users        @relation(fields: [userId], references: [id])
   amount      Float
   tranferType TransferType
   description String?
