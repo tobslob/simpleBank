@@ -4,6 +4,7 @@ import { accountNumberGenerator, UnAuthorisedError } from "@app/data/util";
 import { seal } from "@app/common/services/jsonwebtoken";
 import { config } from "dotenv";
 import { UserRepo } from "@app/data/user/user.repo";
+import { entity } from "./entity";
 
 config();
 
@@ -39,10 +40,17 @@ class UserService {
   }
 
   async getUser(id: string): Promise<User> {
-    return await UserRepo.users.findUnique({
+    const user = await UserRepo.users.findUnique({
       where: { id },
       include: { account: true },
     });
+
+    for (const account of user.account) {
+      const totalSpent = await entity.amountSpent(account.id, user.id);
+      account["totalSpent"] = totalSpent;
+    }
+
+    return user;
   }
 
   async login(login: LoginDTO): Promise<string> {
