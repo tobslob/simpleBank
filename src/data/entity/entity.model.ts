@@ -5,6 +5,7 @@ export interface Entity extends BaseModel {
   userId: string;
   amount: number;
   tranferType: "CREDIT" | "DEBIT";
+  currency: "GBP" | "USD";
   description?: string;
   createdAt: Date;
 }

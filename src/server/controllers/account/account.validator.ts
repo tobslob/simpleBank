@@ -1,10 +1,8 @@
 import Joi from "@hapi/joi";
 import { JoiValidator } from "@app/data/util";
-import { values } from "lodash";
-import { Currency } from "@app/data/account/account.model";
 
 export const isAccount = Joi.object({
-  currency: JoiValidator.validateString().valid(values(Currency)).required(),
+  currency: JoiValidator.validateString().valid(["GBP", "USD"]).required(),
 });
 
 export const isAccountNumber = Joi.object({

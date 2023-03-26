@@ -1,4 +1,4 @@
-import { Account, Currency } from "../account/account.model";
+import { Account } from "../account/account.model";
 import { BaseModel } from "../base/base.model";
 
 export interface User extends BaseModel{
@@ -13,7 +13,7 @@ export interface UserDTO {
   lastName: string;
   emailAddress: string;
   password: string;
-  currency: Currency;
+  currency: "GBP" | "USD";
 }
 
 export interface LoginDTO {
