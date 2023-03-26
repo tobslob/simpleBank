@@ -25,8 +25,9 @@ class Accounts {
         amount: balance.balance,
         tranferType: "CREDIT",
         accountId: id,
+        currency: currency,
         userId: req.user.id,
-        description: `topup balance with: ${currency}${balance.balance}`,
+        description: `topup balance with: ${currency} ${balance.balance}`,
       },
     });
     return account;

@@ -4,18 +4,13 @@ export interface Account extends BaseModel {
   accountNumber: string;
   userId: string;
   balance: number;
-  currency: string;
+  currency: "GBP" | "USD";
 }
 
 export interface AccountDTO {
-  currency: Currency;
+  currency: "GBP" | "USD";
 }
 
 export interface BalanceDTO {
   balance: number;
-}
-
-export enum Currency {
-  GBP = "GBP",
-  USD = "USD",
 }

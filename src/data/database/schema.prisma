@@ -48,6 +48,7 @@ model Entries {
   amount      Float
   tranferType TransferType
   description String?
+  currency    Currency?
   createdAt   DateTime     @default(now())
 }
 

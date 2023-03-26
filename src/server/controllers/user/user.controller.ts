@@ -31,14 +31,14 @@ export class UserController extends BaseController<controllerResponse> {
     }
   }
 
-  @httpGet("/:token")
+  @httpGet("/:id")
   async getUser(
     @request() req: Request,
     @response() res: Response,
-    @requestParam("token") token: string
+    @requestParam("id") id: string
   ) {
     try {
-      const user = await Users.decodeToken(token);
+      const user = await Users.getUser(id);
       this.handleSuccess(req, res, user);
     } catch (error) {
       this.handleError(req, res, error);

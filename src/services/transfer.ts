@@ -27,6 +27,7 @@ class Transfers {
           tranferType: TransferType.DEBIT,
           accountId: account[0].id,
           userId: id,
+          currency: acct?.currency,
           description: transfer.description,
         },
       });
@@ -41,6 +42,7 @@ class Transfers {
           amount: transfer.amount,
           tranferType: TransferType.CREDIT,
           accountId: receiverAcct.id,
+          currency: acct?.currency,
           userId: id,
           description: `account credited by ${firstName}`,
         },
