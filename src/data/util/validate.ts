@@ -20,7 +20,7 @@ export function validate(schema: SchemaLike): RequestHandler {
           errors[e.message.split(" ", 1)[0].replace(/['"]/g, "")] =
             e.message.replace(/['"]/g, "");
         });
-        return res.json({
+        return res.status(422).json({
           code: ServerError,
           message: errors,
         });
