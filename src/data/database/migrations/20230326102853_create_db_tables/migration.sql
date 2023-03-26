@@ -33,8 +33,10 @@ CREATE TABLE "Accounts" (
 CREATE TABLE "Entries" (
     "id" TEXT NOT NULL,
     "accountId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
     "tranferType" "TransferType" NOT NULL,
+    "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Entries_pkey" PRIMARY KEY ("id")
@@ -63,6 +65,9 @@ ALTER TABLE "Accounts" ADD CONSTRAINT "Accounts_userId_fkey" FOREIGN KEY ("userI
 
 -- AddForeignKey
 ALTER TABLE "Entries" ADD CONSTRAINT "Entries_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Entries" ADD CONSTRAINT "Entries_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Transfers" ADD CONSTRAINT "Transfers_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
