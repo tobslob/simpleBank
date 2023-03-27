@@ -43,8 +43,8 @@ class Transfers {
           tranferType: TransferType.CREDIT,
           accountId: receiverAcct.id,
           currency: acct?.currency,
-          userId: id,
-          description: `account credited by ${firstName}`,
+          userId: receiverAcct.userId,
+          description: `${transfer.description}/credit by ${firstName}`,
         },
       });
     });
