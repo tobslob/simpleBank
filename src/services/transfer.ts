@@ -1,5 +1,6 @@
 import { TransferDTO } from "@app/data/transfer/transfer.model";
 import { transferRepo } from "@app/data/transfer/transfer.repo";
+import { ForbiddenError } from "@app/data/util";
 import { TransferType } from "@prisma/client";
 import { Request } from "express";
 
@@ -7,6 +8,13 @@ class Transfers {
   async createTransfer(transfer: TransferDTO, req: Request) {
     let acct;
     const { account, id, firstName } = req.user;
+
+    if (account?.[0].accountNumber === transfer.toAccountId) {
+      throw new ForbiddenError(
+        "you can't initiate self transaction to same account"
+      );
+    }
+
     await transferRepo.$transaction(async (transaction) => {
       const getAcct = await transaction.accounts.findFirst({
         where: { accountNumber: account[0].accountNumber },
