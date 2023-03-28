@@ -5,7 +5,6 @@ import supertest, { SuperTest, Test } from "supertest";
 import { App } from "../src/server/app";
 import { StatusCodes } from "http-status-codes";
 import { createUser } from "./mocks/services";
-import { Currency } from "../src/data/account/account.model";
 import faker from "faker";
 import { PrismaClient } from "@prisma/client";
 
@@ -40,7 +39,7 @@ describe("User", () => {
         lastName: faker.name.lastName(),
         emailAddress: faker.internet.email(),
         password: faker.internet.password(),
-        currency: Currency.USD,
+        currency: "USD",
       })
       .expect(StatusCodes.OK);
     expect(body.data).toHaveProperty("firstName");

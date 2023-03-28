@@ -5,7 +5,6 @@ import supertest, { SuperTest, Test } from "supertest";
 import { App } from "../src/server/app";
 import { StatusCodes } from "http-status-codes";
 import { createUser } from "./mocks/services";
-import { Currency } from "../src/data/account/account.model";
 import { createSession, createJsonWebToken } from "./helpers";
 
 let app: App;
@@ -37,7 +36,7 @@ describe("Accounts", () => {
       .post(baseUrl)
       .set("Authorization", token)
       .send({
-        Currency: Currency.GBP,
+        currency: "GBP",
       })
       .expect(StatusCodes.OK);
   });
