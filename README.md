@@ -27,7 +27,7 @@
 
 ## DB MODEL
 
-![DB MODEL](https://github.com/tobslob/simpleBank/blob/staging/database-model.png?raw=true)
+![DB MODEL](https://github.com/tobslob/simpleBank/blob/staging/simple-bank-DB-model.png?raw=true)
 
 # Running locally
 
