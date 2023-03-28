@@ -29,6 +29,9 @@
 
 ![DB MODEL](https://github.com/tobslob/simpleBank/blob/staging/simple-bank-DB-model.png?raw=true)
 
+## UML CLASS DIAGRAM
+![UML CLASS DIAGRAM](https://github.com/tobslob/simpleBank/blob/staging/UML-Class-Diagram.png?raw=true)
+
 # Running locally
 
 To start the application in dev mode, please run:
