@@ -3,15 +3,24 @@ import { transferRepo } from "@app/data/transfer/transfer.repo";
 import { ForbiddenError } from "@app/data/util";
 import { TransferType } from "@prisma/client";
 import { Request } from "express";
+import { accounts } from "./account";
 
 class Transfers {
   async createTransfer(transfer: TransferDTO, req: Request) {
     let acct;
     const { account, id, firstName } = req.user;
 
-    if (account?.[0].accountNumber === transfer.toAccountId) {
+    if (account?.[0]?.accountNumber === transfer.toAccountId) {
       throw new ForbiddenError(
         "you can't initiate self transaction to same account"
+      );
+    }
+
+    const receiverAccount = await accounts.getAccount(transfer.toAccountId);
+
+    if (account?.[0]?.currency !== receiverAccount.currency) {
+      throw new ForbiddenError(
+        "transfer to different currency are not currently supported"
       );
     }
 
